@@ -4,20 +4,21 @@
     <meta charset="UTF-8">
     <title>  {{title}}  </title>
     <link rel="stylesheet" href="/static/css/bootstrap.css"/>
-    <source src="static/js/bootstrap.js"></script>
+    <script src="static/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="/static/site.css"/>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-black">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Navbar</a>
+          <a class="navbar-brand" href="#">TippyTechnologies</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
-              <a class="nav-link" href="/history">History</a>
-              <a class="nav-link" href="/imagegallery">Image Gallery</a>
+              <a class="nav-link" href="/forums">Forums</a>
+              <a class="nav-link" href="/account">Account</a>
               <a class="nav-link" href="/contactus">Contact Us</a>
             </div>
           </div>
@@ -27,26 +28,26 @@
     <div class="container-fluid">
 
       <div class="row">
-        <div class="col">  
+        <div class="col-sm-12">  
         {% block rowOneContent %}
         {% endblock %}        
         </div>
       </div>
 
       <div class="row">
-        <div class="col-4">
+        <div class="col-sm-2 bg-dark">
           {% block rowTwoColOneContent %}
           {% endblock %}
       </div>
 
-        <div class="col-8">
+        <div class="col-sm-2 bg-dark">
           {% block rowTwoColTwoContent %}
           {% endblock %}
       </div>
     </div>
 
     <div class="row">
-      <div class="col">  
+      <div class="col-sm-12">  
         {% block rowThreeContent %}
         {% endblock %}        
       </div>
