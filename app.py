@@ -79,7 +79,7 @@ def reset_password():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for("/"))
+    return redirect(url_for("home"))
 
 if __name__ == '__main__':
     app.run()
