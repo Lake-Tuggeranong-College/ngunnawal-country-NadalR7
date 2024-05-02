@@ -43,7 +43,7 @@ def register():
         new_user.set_password(form.password.data)
         db.session.add(new_user)
         db.session.commit()
-        return redirect(url_for("/"))
+        return redirect(url_for("home"))
     return render_template("registration.html", title="User Registration", form=form)
 
 
@@ -57,7 +57,7 @@ def login():
             # User has been authenticated
             login_user(user)
             print("DEBUG: Login Successful")
-            return redirect(url_for("/"))
+            return redirect(url_for("home"))
         else:
             print("DEBUG: Login Failed")
             # Username or password incorrect
@@ -73,7 +73,7 @@ def reset_password():
         user.set_password(form.new_password.data)
         db.session.commit()
         flash("Your password has been changed.")
-        return redirect(url_for("/"))
+        return redirect(url_for("home"))
     return render_template("passwordreset.html", title='Reset Password', form=form, user=current_user)
 
 @app.route('/logout')
