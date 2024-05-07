@@ -14,15 +14,11 @@ from models import Contact, User
 
 @app.route('/')
 def home():  # put application's code here
-    return render_template("index.html", title="Homepage")
+    return render_template("index.html", title="Homepage", user=current_user)
 
 @app.route('/forums')
 def forums():  # put application's code here
-    return render_template("forums.html", title="TippyTechnologies Forums")
-
-@app.route('/account')
-def account():  # put application's code here
-    return render_template("account.html", title="Account")
+    return render_template("forums.html", title="TippyTechnologies Forums", user=current_user)
 
 @app.route("/contactus", methods=["POST", "GET"])
 def contact():
@@ -31,7 +27,7 @@ def contact():
         new_contact = Contact(name=form.name.data, email=form.email.data, message=form.message.data)
         db.session.add(new_contact)
         db.session.commit()
-        # flash("Your message has been sent to administrators.")
+        flash("Your message has been sent to administrators.")
         return redirect(url_for("home"))
     return render_template("contactus.html", title="Contact Us", form=form, user=current_user)
 
@@ -44,7 +40,7 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         return redirect(url_for("home"))
-    return render_template("registration.html", title="User Registration", form=form)
+    return render_template("registration.html", title="User Registration", form=form, user=current_user) 
 
 
 @app.route('/login', methods=["POST", "GET"])
@@ -60,9 +56,9 @@ def login():
             return redirect(url_for("home"))
         else:
             print("DEBUG: Login Failed")
-            # Username or password incorrect
+            flash("Username or Password incorrect")
             return redirect(url_for("login"))
-    return render_template("login.html", title="Login", form=form)
+    return render_template("login.html", title="Login", form=form, user=current_user)
 
 @app.route('/passwordreset', methods=['GET', 'POST'])
 @login_required
@@ -80,6 +76,16 @@ def reset_password():
 def logout():
     logout_user()
     return redirect(url_for("home"))
+
+# Error Handlers
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template("404.html", user=current_user), 404
+
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template("500.html", user=current_user), 500
 
 if __name__ == '__main__':
     app.run()

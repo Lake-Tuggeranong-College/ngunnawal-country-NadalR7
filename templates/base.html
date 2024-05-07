@@ -18,18 +18,27 @@
             <div class="navbar-nav">
               <a class="nav-link active" aria-current="page" href="/">Home</a>
               <a class="nav-link" href="/forums">Forums</a>
-              <a class="nav-link" href="/account">Account</a>
               <a class="nav-link" href="/contactus">Contact Us</a>
+              {% if user.is_anonymous %}
               <a class="nav-link" href="/register">Registration</a>
               <a class="nav-link" href="/login">Login</a>
+              {% else %}
               <a class="nav-link" href="/logout">Logout</a>
               <a class="nav-link" href="/passwordreset">Password Reset</a>
-              
+              {% endif %}
             </div>
           </div>
         </div>
       </nav>
-
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+          <ul class="flashes">
+              {% for message in messages %}
+                  <li><div class="focus">{{ message }}</div></li>
+              {% endfor %}
+          </ul>
+      {% endif %}
+  {% endwith %}
     <div class="container-fluid">
 
       <div class="row">
@@ -57,6 +66,5 @@
         {% endblock %}        
       </div>
      </div>
-       
 </body>
 </html>
