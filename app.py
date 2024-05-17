@@ -121,10 +121,14 @@ def reset_user_password(userid):
 @app.route('/admin/user_enable/<userid>')
 @login_required
 def user_enable(userid):
-    user = User.query.filter_by(id=userid).first()
-    user.active = not user.active
-    db.session.commit()
-    return redirect(url_for("list_all_users"))
+    if current_user.is_admin():
+        user = User.query.filter_by(id=userid).first()
+        user.active = not user.active
+        db.session.commit()
+        return redirect(url_for("list_all_users"))
+    else:
+        flash("You must be an administrator to access this functionality.")
+        return redirect(url_for("homepage"))
 if __name__ == '__main__':
     app.run()
 
