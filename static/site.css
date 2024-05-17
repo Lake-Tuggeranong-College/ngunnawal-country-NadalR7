@@ -1,0 +1,22 @@
+body {background-color: black;}
+
+.whitecss {color: white;}
+.greencss {color: green;}
+
+.navbar a {
+    font-size: 1em;
+    color: white;
+    text-align: center;
+    padding: 1em 1em;
+    text-decoration: none;
+}
+
+.flashes {
+    padding: 12px;
+    border-radius: 3px;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    border: 2px solid olive;
+    background-color: green;
+    color: black;
+}
