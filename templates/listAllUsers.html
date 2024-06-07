@@ -6,27 +6,19 @@
 {% endblock %}
 
 {% block rowTwoColOneContent %}
-  
+    <div class="whitecss">
+        {% for user in users %}
+            <div class="whitecss">
+                <div class="col-md-4">{{ user.email_address }}</div>
+                <div class="col-md-4"><a href="/reset_password/{{ user.id }}">Reset Password</a></div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {# Place the content for the cellContent2 in this block #}
 {% block rowTwoColTwoContent %}
-<div class="container-fluid">
-    {% for user in users %}
-        <div class="whitecss">
-            <div class="col-md-4">{{ user.email_address }}</div>
-            <div class="col-md-4"><a href="/reset_password/{{ user.id }}">Reset Password</a></div>
-            <div class="col-md-3">
-                {% if user.active %}
-                    Enabled
-                {% else %}
-                    Disabled
-                {% endif %}
-            </div>
-            <div class="col-md-3"><a href="/admin/user_enable/{{ user.id }}">Enable/Disable Account</a></div>
-        </div>
-    {% endfor %}
-</div>
+  
 {% endblock %}
 
 {% block rowThreeContent %}
